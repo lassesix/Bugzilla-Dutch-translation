@@ -105,7 +105,7 @@ TUI_hide_default('information_query');
 <div id="detailed_information" class="bz_section_title">
   <div id="information_query_controller" class="arrow">&#9660;</div>
   <a href="javascript:TUI_toggle_class('information_query')">
-    Detailed [% terms.Bug %] Information
+    Gedetailleerde [% terms.Bug %]-informatie
   </a>
   <span class="section_help">Beperk resultaten volgens de volgende velden: 
     [%+ field_descs.longdesc FILTER html %], [%+ field_descs.bug_file_loc FILTER html %], 
@@ -232,25 +232,25 @@ TUI_hide_default('information_query');
     <div class="search_email_fields">
       Any of:
       [% PROCESS role_types field = { count => n, name => "emailassigned_to",
-                  label=> "the ${terms.Bug} ${field_descs.assigned_to}" } %]
+                  label=> "de ${terms.Bug} ${field_descs.assigned_to}" } %]
       [% PROCESS role_types field = { count => n, name => "emailreporter",
-                  label=> "the ${field_descs.reporter}" } %]    
+                  label=> "de ${field_descs.reporter}" } %]    
       [% IF Param('useqacontact') %]
           [% PROCESS role_types field = { count => n, name => "emailqa_contact", 
-                  label=> "the ${field_descs.qa_contact}" } %]
+                  label=> "de ${field_descs.qa_contact}" } %]
       [% END %]
       [% PROCESS role_types field = { count => n, name => "emailcc", 
-                  label=> "a ${field_descs.cc} list member" } %]
+                  label=> "een lid van de ${field_descs.cc}-lijst" } %]
       [% PROCESS role_types field = { count => n, name => "emaillongdesc", 
-                  label=> " a ${field_descs.commenter}" } %]
+                  label=> "een ${field_descs.commenter}" } %]
       <select name="emailtype[% n %]">
       [% FOREACH qv = [
-        { name => "substring", description => "contains" },
-        { name => "notsubstring", description => "doesn't contain" },
+        { name => "substring", description => "bevat" },
+        { name => "notsubstring", description => "bevat niet" },
         { name => "equals", description => "is" },
-        { name => "notequals", description => "is not" },
-        { name => "regexp", description => "matches regexp" },
-        { name => "notregexp", description => "doesn't match regexp" } ] %]
+        { name => "notequals", description => "is niet" },
+        { name => "regexp", description => "matcht regexp" },
+        { name => "notregexp", description => "matcht regexp niet" } ] %]
         <option value="[% qv.name %]"
           [% " selected" IF default.emailtype.$n == qv.name %]>[% qv.description %]</option>
       [% END %]
@@ -305,7 +305,7 @@ TUI_hide_default('information_query');
            value="[% default.chfieldfrom.0 FILTER html %]" onchange="updateCalendarFromField(this)"> 
            <button type="button" class="calendar_button"
                           id="button_calendar_chfieldfrom"
-                          onclick="showCalendar('chfieldfrom')"><span>Calendar</span></button>
+                          onclick="showCalendar('chfieldfrom')"><span>Kalender</span></button>
            en 
            <div id="con_calendar_chfieldfrom"></div>
           <input name="chfieldto" size="10" id="chfieldto" 
