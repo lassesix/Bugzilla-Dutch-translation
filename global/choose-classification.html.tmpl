@@ -12,11 +12,11 @@
   #%]
 
 [% IF target == "enter_bug.cgi" %]
-  [% title = "Enter $terms.Bug" %]
-  [% subheader = "Select Classification" %]
+  [% title = "$terms.Bug indienen" %]
+  [% subheader = "Classificatie Selecteren" %]
 [% END %]
 
-[% DEFAULT title = "Choose the classification" %]
+[% DEFAULT title = "Kies de classificatie" %]
 [% PROCESS global/header.html.tmpl %]
 
 [% USE Bugzilla %]
