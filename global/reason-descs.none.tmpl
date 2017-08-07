@@ -1,0 +1,28 @@
+[%# This Source Code Form is subject to the terms of the Mozilla Public
+  # License, v. 2.0. If a copy of the MPL was not distributed with this
+  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  #
+  # This Source Code Form is "Incompatible With Secondary Licenses", as
+  # defined by the Mozilla Public License, v. 2.0.
+  #%]
+
+[% SET reason_descs = {
+  ${constants.REL_ASSIGNEE} => "U bent de verantwoordelijke voor de ${terms.bug}.",
+  ${constants.REL_REPORTER} => "U rapporteerde de ${terms.bug}.",
+  ${constants.REL_QA}       => "U bent de QA Contact voor de ${terms.bug}.",
+  ${constants.REL_CC}       => "U staat op de CC-lijst voor de ${terms.bug}.",
+  ${constants.REL_GLOBAL_WATCHER} => "U observeert alle ${terms.bug}-wijzigingen.",
+} %]
+
+[% SET watch_reason_descs => {
+  ${constants.REL_ASSIGNEE} =>
+    "U observeert de verantwoordelijke van de ${terms.bug}.",
+  ${constants.REL_REPORTER} =>
+    "U observeert de rapporteur van de ${terms.bug}.",
+  ${constants.REL_QA}       =>
+    "U observeert de QA Contact van de ${terms.bug}.",
+  ${constants.REL_CC}       =>
+    "U observeert iemand op de CC-lijst van de ${terms.bug}.",
+} %]
+
+[% Hook.process('end') %]

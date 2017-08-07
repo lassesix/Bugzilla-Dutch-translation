@@ -1,0 +1,126 @@
+[%# This Source Code Form is subject to the terms of the Mozilla Public
+  # License, v. 2.0. If a copy of the MPL was not distributed with this
+  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  #
+  # This Source Code Form is "Incompatible With Secondary Licenses", as
+  # defined by the Mozilla Public License, v. 2.0.
+  #%]
+
+[%# INTERFACE:
+  # target: string. URL to go to after login.
+  #%]
+
+[% IF !target %]
+ [% target = "index.cgi" %]
+[% END %]
+
+[% PROCESS global/header.html.tmpl
+  title = "Aanmelden op $terms.Bugzilla"
+%]
+
+[% USE Bugzilla %]
+
+<p>
+  [% terms.Bugzilla %] heeft een geldige gebruikersnaam en wachtwoord nodig om door te gaan.
+</p>
+
+<form name="login" action="[% urlbase FILTER html %][% target FILTER html %]" method="POST"
+[%- IF Bugzilla.cgi.param("data") %] enctype="multipart/form-data"[% END %]>
+  <table>
+    <tr>
+      <th>
+        <label for="Bugzilla_login">
+          [% IF login_not_email %]
+            Gebruikersnaam:
+          [% ELSE %]
+            Uw emailadres:
+          [% END %]
+        </label>
+      </th>
+      <td>
+        <input size="35" id="Bugzilla_login" name="Bugzilla_login"
+               [%- ' type="email"' UNLESS login_not_email %] autofocus required>
+        [% Param('emailsuffix') FILTER html %]
+      </td>
+    </tr>
+    <tr>
+      <th><label for="Bugzilla_password">Wachtwoord:</label></th>
+      <td>
+        <input type="password" size="35" id="Bugzilla_password" name="Bugzilla_password" required>
+      </td>
+    </tr>
+
+    [% IF Param('rememberlogin') == 'defaulton' || 
+          Param('rememberlogin') == 'defaultoff' %]
+      <tr>
+        <th>&nbsp;</th>
+        <td>
+          <input type="checkbox" id="Bugzilla_remember" name="Bugzilla_remember" value="on"
+                 [%+ "checked" IF Param('rememberlogin') == "defaulton" %]>
+          <label for="Bugzilla_remember">Mijn aanmelding onthouden</label>
+        </td>
+      </tr>
+    [% END %]
+
+    <tr>
+      <th>&nbsp;</th>
+      <td>
+        <input type="checkbox" id="Bugzilla_restrictlogin" name="Bugzilla_restrictlogin"
+               checked="checked">
+        <label for="Bugzilla_restrictlogin">Beperk deze sessie tot dit IP-adres
+        (deze optie gebruiken verbetert de beveiliging)</label>
+      </td>
+    </tr>
+  </table>
+
+  [% PROCESS "global/hidden-fields.html.tmpl"
+     exclude="^Bugzilla_(login|password|restrictlogin)$" %]
+
+  <input type="hidden" name="Bugzilla_login_token"
+         value="[% get_login_request_token() FILTER html %]">
+  <input type="submit" name="GoAheadAndLogIn" value="Aanmelden" id="log_in">
+
+  <p>
+    (Merk op: cookies moeten geactiveerd zijn voor deze website. 
+    Zo niet zal u vaak moeten inloggen.)
+  </p>
+</form>
+
+[% Hook.process('additional_methods') %]
+
+[%# Allow the user to create a new account, or request a token to change
+  # their password, assuming that our auth method allows that.
+  #%]
+
+  [% IF Param("createemailregexp") && user.authorizer.user_can_create_account %]
+    <hr>
+
+    <p>
+      Indien u geen [% terms.Bugzilla %] account heeft, kunt u
+      <a href="createaccount.cgi">een nieuwe account aanmaken</a>.
+      [% IF Param("requirelogin") %]
+        Een gebruiksersaccount is vereist omdat deze Bugzilla-installatie
+        alleen toegankelijk is voor geauthenticeerde gebruikers.
+      [% ELSIF target.match("_bug\.cgi$") %]
+        Een gebruikersaccount is vereist om een nieuwe [% terms.bug %] of om commentaar toe te voegen
+        aan bestaande [% terms.bugs %] zodat u gecontacteerd kunt worden voor meer informatie indien
+        nodig.
+      [% END %]
+    </p>
+  [% END %]
+
+  [% IF user.authorizer.can_change_password %]
+    <hr>
+
+    <form id="forgot" method="get" action="token.cgi">
+      <input type="hidden" name="a" value="reqpw">
+      Indien u een account heeft maar uw wachtwoord vergeten bent,
+      vul dan uw gebruikersnaam hieronder in en dien een aanvraag in
+      om uw wachtwoord te wijzigen.<br>
+      <input size="35" name="loginname" required>
+      <input type="hidden" id="token" name="token" value="[% issue_hash_token(['reqpw']) FILTER html %]">
+      <input type="submit" id="request" value="Wachtwoord resetten">
+    </form>
+  [% END %]
+
+[% PROCESS global/footer.html.tmpl %]

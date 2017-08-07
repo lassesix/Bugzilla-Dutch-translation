@@ -1,0 +1,147 @@
+[%# This Source Code Form is subject to the terms of the Mozilla Public
+  # License, v. 2.0. If a copy of the MPL was not distributed with this
+  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  #
+  # This Source Code Form is "Incompatible With Secondary Licenses", as
+  # defined by the Mozilla Public License, v. 2.0.
+  #%]
+
+[%# Remember to PROCESS rather than INCLUDE this template. %]
+
+[% SET search_descs = {
+  "noop"           => "---",
+  "equals"         => "is gelijk aan",
+  "notequals"      => "is niet gelijk aan",
+  "anyexact"       => "is gelijk aan een van de combinaties",
+  "substring"      => "bevat de combinatie",
+  "casesubstring"  => "bevat de combinatie (exact)",
+  "notsubstring"   => "bevat niet de combiantie",
+  "anywordssubstr" => "bevat een van de combinaties",
+  "allwordssubstr" => "bevat al de combinaties",
+  "nowordssubstr"  => "bevat geen van de combinaties",
+  "regexp"         => "komt overeen met de regular expression",
+  "notregexp"      => "komt niet overeen met de regular expression",
+  "lessthan"       => "is kleiner dan",
+  "lessthaneq"     => "is kleiner dan of gelijk aan",
+  "greaterthan"    => "is groter dan",
+  "greaterthaneq"  => "is groter dan of gelijk aan",
+  "anywords"       => "bevat een van de woorden",
+  "allwords"       => "bevat al de woorden",
+  "nowords"        => "bevat geen van de woorden",
+  "changedbefore"  => "gewijzigd voor",
+  "changedafter"   => "gewijzigd na",
+  "changedfrom"    => "gewijzigd van",
+  "changedto"      => "gewijzigd naar",
+  "changedby"      => "gewijzigd door",
+  "matches"        => "komt overeen met",
+  "notmatches"     => "komt niet overeen met",
+  "isempty"        => "is leeg",
+  "isnotempty"     => "is niet leeg",
+} %]
+
+[% field_types = { ${constants.FIELD_TYPE_UNKNOWN}       => "Ongekend type",
+                   ${constants.FIELD_TYPE_FREETEXT}      => "Vrije tekst",
+                   ${constants.FIELD_TYPE_INTEGER}       => "Geheel getal",
+                   ${constants.FIELD_TYPE_SINGLE_SELECT} => "Selectie-lijst",
+                   ${constants.FIELD_TYPE_MULTI_SELECT}  => "Selectie-vak",
+                   ${constants.FIELD_TYPE_TEXTAREA}      => "Groot tekstvak",
+                   ${constants.FIELD_TYPE_DATETIME}      => "Datum/Tijd",
+                   ${constants.FIELD_TYPE_DATE}          => "Datum",
+                   ${constants.FIELD_TYPE_BUG_ID}        => "$terms.Bug ID",
+                } %]
+
+[% IF in_template_var %]
+  [% PROCESS "global/value-descs.none.tmpl" %]
+  [% SET vars.value_descs = value_descs %]
+  [% SET vars.terms = terms %]
+
+  [%# field_descs is loaded as a global template variable and cached
+    # across all templates--see VARIABLES in Bugzilla/Template.pm.
+    #%]
+  [% vars.field_descs = {
+    "[Bug creation]"          => "[$terms.Bug creation]",
+     "actual_time"             => "Effectieve uren",
+     "alias"                   => "Alias",
+     "assigned_to"             => "Opvolger",
+     "assigned_to_realname"    => "Opvolger echte naam",
+     "attach_data.thedata"     => "Bijlage data",
+     "attachments.description" => "Bijlage beschrijving",
+     "attachments.filename"    => "Bijlage bestandsnaam",
+     "attachments.mimetype"    => "Bijlage mime type",
+     "attachments.ispatch"     => "Bijlage is patch",
+     "attachments.isobsolete"  => "Bijlage is verouderd",
+     "attachments.isprivate"   => "Bijlage is privaat",
+     "attachments.submitter"   => "Bijlage-indiener",
+     "blocked"                 => "Blokkeert",
+     "bug_file_loc"            => "URL",
+     "bug_group"               => "Groep",
+     "bug_id"                  => "$terms.Bug ID",
+     "bug_severity"            => "Ernst",
+     "bug_status"              => "Status",
+     "changeddate"             => "Gewijzigd",
+     "cc"                      => "CC",
+     "classification"          => "Classificatie",
+     "cclist_accessible"       => "CC lijst toegankelijk",
+     "commenter"               => "Commentator",
+     "component_id"            => "Component ID",
+     "component"               => "Component",
+     "content"                 => "Inhoud",
+     "creation_ts"             => "Datum van creatie",
+     "days_elapsed"            => "Dagen sinds wijziging $terms.bug",
+     "deadline"                => "Deadline",
+     "delta_ts"                => "Gewijzigd",
+     "dependson"               => "Hangt af van",
+     "dup_id"                  => "Duplikaat",
+     "estimated_time"          => "Geschatte tijd",
+     "everconfirmed"           => "Ooit bevestigd",
+     "flagtypes.name"          => "Vlaggen",
+     "keywords"                => "Sleutelwoorden",
+     "last_visit_ts"           => "Laatste bezoek",
+     "longdesc"                => "Commentaar",
+     "longdescs.count"         => "Aantal commentaren",
+     "longdescs.isprivate"     => "Commentaar is privaat",
+     "newcc"                   => "CC",
+     "op_sys"                  => "OS",
+     "opendate"                => "Geopend",
+     "owner_idle_time"         => "Tijd sinds laatste bezoek opvolger",
+     "percentage_complete"     => "%Compleet",
+     "priority"                => "Prioriteit",
+     "product_id"              => "Product ID",
+     "product"                 => "Product",
+     "qa_contact"              => "QA Contact",
+     "qa_contact_realname"     => "QA Contact echt naam",
+     "remaining_time"          => "Uren over",
+     "rep_platform"            => "Hardware",
+     "reporter"                => "Rapporteur",
+     "reporter_accessible"     => "Rapporteur toegankelijk",
+     "reporter_realname"       => "Rapporteur echte naam",
+     "requestees.login_name"   => "Aanvrager vlag",
+     "resolution"              => "Oplossing",
+     "see_also"                => "Zie ook",
+     "setters.login_name"      => "Activator van vlag",
+     "setting"                 => "Instelling",
+     "settings"                => "Instellingen",
+     "short_desc"              => "Samenvatting",
+     "short_short_desc"        => "Samenvatting",
+     "status_whiteboard"       => "Whiteboard",
+     "tag"                     => "Persoonlijke tags",
+     "target_milestone"        => "Doel mijlplaal",
+     "version"                 => "Versie",
+     "work_time"               => "Uren gewerkt",
+  } %]
+
+  [%# Also include any custom fields or fields which don't have a
+      Description here, by copying their Description from the
+      database. If you want to override this for your language
+      or your installation, just use a hook. %]
+  [% UNLESS Param('shutdownhtml') %]
+    [% FOREACH bz_field = bug_fields.values %]
+      [% SET vars.field_descs.${bz_field.name} = bz_field.description
+         IF !vars.field_descs.${bz_field.name}.defined %]
+    [% END %]
+  [% END %]
+
+  [% PROCESS "bug/field-help.none.tmpl" %]
+[% END %]
+
+[% Hook.process("end") %]

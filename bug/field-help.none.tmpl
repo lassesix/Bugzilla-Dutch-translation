@@ -1,0 +1,242 @@
+[%# This Source Code Form is subject to the terms of the Mozilla Public
+  # License, v. 2.0. If a copy of the MPL was not distributed with this
+  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  #
+  # This Source Code Form is "Incompatible With Secondary Licenses", as
+  # defined by the Mozilla Public License, v. 2.0.
+  #%]
+
+[%# This file describes both bug fields and search fields.
+  # As calling this template once per label is very expensive,
+  # it is called only by Template.pm. %]
+
+[% RETURN UNLESS in_template_var %]
+
+[% vars.help_html = {
+
+# Note that all these keys here are in alphabetical order, though
+# search-specific fields are at the bottom.
+
+##############
+# Bug Fields #
+##############
+
+alias =>
+  "Een korte, unieke naam toegewezen aan $terms.abug als hulpmiddel om
+   hem op te zoeken en ernaar te refereren op andere plaatsen in Bugzilla.",
+
+assigned_to =>
+  "De persoon die verantwoordelijk is voor het oplossen van de ${terms.bug}.",
+
+blocked =>
+  "Deze $terms.bug moet opgelost worden voordat de $terms.bugs opgelijst in dit
+   veld opgelost kunnen worden.",
+
+bug_file_loc =>
+  "$terms.Bugs kunnen met een URL geassocieerd zijn - bijvoorbeeld een"
+  _ " link naar de webpagina waarop het probleem vastgesteld is.",
+
+bug_id =>
+  "Het numerieke id van $terms.abug, uniek in deze installatie"
+  _ " van Bugzilla.",
+
+bug_severity =>
+  "Hoe ernstig de $terms.bug is, of of het een verbetering is.",
+
+bug_status =>
+  "$terms.Abug kan zich in een van meerdere statussen bevinden.",
+
+cc =>
+  "Gebruikers die mogelijks geen directe rol spelen in deze $terms.bug, 
+   maar die interesse hebben in de vooruitgang ervan.",
+
+classification => 
+  "$terms.Bugs worden gecategoriseerd in Classificaties, Producten en"
+  _ " Componenten. Classificaties is de categorisatie van het hoogste niveau.",   
+
+component => 
+  "Componenten zijn tweede-niveau categorieën; ze behoren elk tot een"
+  _ " bepaald Product. Selecteer een Product om deze lijst te verkleinen.",
+
+creation_ts =>
+  "Wanneer de $terms.bug werd ingediend.",
+
+deadline =>
+  "De datum waarop deze $terms.bug afgehandeld moet zijn, ingegeven in het YYYY-MM-DD
+   formaat.",
+
+delta_ts =>
+  "Wanneer deze $terms.bug het laatst werd geactualiseerd.",
+
+dependson =>
+  "De hier opgelijst $terms.bugs moeten afgehandeld zijn voordat deze $terms.bug
+   afgehandeld kan worden.",
+
+estimated_time =>
+  "De geschatte tijdsduur benodigd om deze ${terms.bug} af te handelen.",
+
+importance =>
+  "Het belang van $terms.abug wordt beschreven als de combinatie van
+   haar $vars.field_descs.priority en ${vars.field_descs.bug_severity}.",
+
+keywords =>
+   "Je kunt trefwoorden van een voorgedefineerde lijst toevoegen aan $terms.bugs, zodat"
+   _ " ze eenvoudig geïdentificeerd en gegroepeerd kunnen worden.",
+
+longdesc =>
+  "$terms.Bugs hebben commentaren toegevoegd door Bugzilla-gebruikers."
+  _ " U kunt naar tekst zoeken in die commentaren.",
+
+op_sys =>
+  "Het besturingssysteem waarop de $terms.bug werd waargenomen.",
+
+percentage_complete =>
+  "Hoe dicht bij 100% afgewerkt deze $terms.bug is, door haar
+   $vars.field_descs.work_time te vergelijken met haar ${vars.field_descs.estimated_time}.",
+
+priority =>
+  "Ingenieurs wijzen prioriteit toe aan hun $terms.bugs door middel van dit veld.",
+
+# Note that this has extra text added below if useclassification is on.
+product =>
+  "$terms.Bugs worden gecategoriseerd in Producten en Componenten.",
+
+qa_contact =>
+  "De verantwoordelijke voor het bevestigen van deze $terms.bug indien ze"
+  _ " onbevestigd is, en om de afhandeling te verifieren zodra de $terms.bug"
+  _ " afgehandeld is.",
+
+remaining_time =>
+  "Het aantal uren werk over voor deze $terms.bug, berekend door
+   het $vars.field_descs.work_time af te trekken van de 
+   ${vars.field_descs.estimated_time}.",
+
+rep_platform => 
+  "De hardware waarop de $terms.bug waargenomen werd.",
+
+reporter =>
+  "De persoon die deze ${terms.bug} heeft ingediend.",
+
+resolution =>
+  "Indien $terms.abug zich in de afgehandelde status bevindt wordt er een van deze redenen"
+  _ " gegeven voor haar afhandeling.",
+
+see_also =>
+  "Dit laat u toe te refereren naar $terms.bugs in andere installaties.
+   U kunt een URL naar $terms.abug invullen in het 'Voeg $terms.Bug URLs toe'
+   veld om aan te geven dat die $terms.bug gerelateerd is aan deze hier. U kunt
+   meerdere URLs invullen door ze te scheiden met spaties.
+
+   <p>U zou dit veld normaal gezien gebruiken om te refereren naar $terms.bugs in
+     <em>andere</em> installaties. Voor $terms.bugs in deze
+     installatie, is het beter de velden $vars.field_descs.dependson en 
+     $vars.field_descs.blocked te gebruiken.</p>",
+
+short_desc =>
+  "De $terms.bug samenvatting is een korte zin die duidelijk"
+  _ " beschrijft waar de $terms.bug over gaat.",
+
+status_whiteboard =>
+  "Elke $terms.bug heeft een vrije-vorm, enkele-lijn tekstveld om"
+  _ " tags en statusinformatie toe te voegen.",
+
+tag =>
+  "In tegenstelling tot ${vars.field_descs.keywords} die globaal zichtbaar zijn
+   voor alle gebruikers, zijn ${vars.field_descs.tag} persoonlijk en kunnen deze alleen
+   gezien en bewerkt worden door hun auteur.
+   Ze aanpassen zal geen melding versturen naar andere gebruikers. Gebruik ze
+   om ${terms.bugs} te taggen en te volgen.",
+
+target_milestone =>
+   "Het $vars.field_descs.target_milestone veld wordt gebruikt om aan te geven wanneer de"
+   _ " ingenieur aan wie de $terms.bug is toegewezen het probleem verwacht af te handelen.",
+
+version =>
+  "Het versie-veld geeft aan in welke software-versie de"
+  _ " $terms.bug gevonden werd.",
+
+votes =>
+  "Er kan op sommige $terms.bugs gestemd worden, en u kunt uw zoekopdrachten beperken tot"
+  _ " $terms.bugs met meer dan een bepaald aantal stemmen.",
+
+work_time =>
+  "De totale hoeveelheid tijd tot nu toe gespendeerd aan deze $terms.bug .",
+
+##########################
+# Search-specific fields #
+##########################
+
+chfield =>
+  "You can search for specific types of change - this field defines"
+  _" which field you are interested in changes for.",
+
+# Duplicated to chfieldto below, also.
+chfieldfrom =>
+  "Specify the start and end dates either in YYYY-MM-DD format
+   optionally followed by HH:mm, in 24 hour clock), or in relative
+   dates such as 1h, 2d, 3w, 4m, 5y, which respectively mean one hour,
+   two days, three weeks, four months, or five years ago. 0d is last
+   midnight, and 0h, 0w, 0m, 0y is the beginning of this hour, week,
+   month, or year.",
+
+chfieldvalue =>
+  "The value the field defined above changed to during that time.",
+
+content =>
+  "This is a field available in searches that does a Google-like
+   'full-text' search on the $vars.field_descs.short_desc and
+   $vars.field_descs.longdesc fields.",
+
+# Duplicated to email2 below, also.
+email1 =>
+  "Every $terms.bug has people associated with it in different"
+  _ " roles. Here, you can search on what people are in what role.",
+
+} %]
+
+[% vars.help_html.email2 = vars.help_html.email1 %]
+[% vars.help_html.chfieldto = vars.help_html.chfieldfrom %]
+[% vars.help_html.deadlinefrom = vars.help_html.deadline %]
+[% vars.help_html.deadlineto = vars.help_html.deadline %]
+
+[% help_all_note = BLOCK %]
+  <strong>Note:</strong> When searching, selecting the option "All"
+  only finds [% terms.bugs %] whose value for this field is literally
+  the word "All".
+[% END %]
+[% FOREACH all_field = ['op_sys', 'rep_platform'] %]
+  [% vars.help_html.$all_field = vars.help_html.$all_field _ ' ' _ help_all_note %]
+[% END %]
+
+[% IF Param('useclassification') %]
+  [% vars.help_html.product = vars.help_html.product 
+      _ " Selecteer een Classificatie om deze lijst te verkleinen." %]
+[% END %]
+
+[% FOREACH help_field = bug_fields.keys %]
+
+  [%# Add help for custom fields. %]
+  [% IF !vars.help_html.${help_field}.defined %]
+    [% IF bug_fields.${help_field}.long_desc %]
+      [% vars.help_html.${help_field} = bug_fields.${help_field}.long_desc %]
+    [% ELSE %]
+      [% SET field_type = bug_fields.${help_field}.type %]
+      [% field_type_desc = BLOCK -%]
+        [% field_types.$field_type FILTER html %]
+      [%- END %]
+      [% vars.help_html.${help_field} = 
+        "A custom $field_type_desc field in this installation"
+        _ " of Bugzilla." %]
+    [% END %]
+  [% END %]
+
+  [%# Add help for the search types, for query.cgi. %]
+  [% type_desc = BLOCK %]
+    The type of [% vars.field_descs.${help_field} FILTER html %] search you 
+    would like.
+  [% END %]
+  [% SET type_name = help_field _ '_type' %]
+  [% vars.help_html.$type_name = type_desc %]
+[% END %]
+
+[% Hook.process("end") %]
