@@ -308,7 +308,7 @@ TUI_hide_default('attachment_text_field');
          emptyok => 1
          custom_userlist => assignees_list
        %]
-      <noscript>(Leave blank to assign to component's default assignee)</noscript>
+      <noscript>(Laat blanco om toe te wijzen aan de standaard verantwoordelijke van de component)</noscript>
     </td>
   </tr>
   
@@ -327,7 +327,7 @@ TUI_hide_default('attachment_text_field');
          emptyok => 1
          custom_userlist => qa_contacts_list
        %]
-        <noscript>(Leave blank to assign to default qa contact)</noscript>
+        <noscript>(Laat blanco om toe te wijzen aan de standaard qa contactpersoon)</noscript>
       </td>
     </tr>
 [% END %]
@@ -349,7 +349,7 @@ TUI_hide_default('attachment_text_field');
   </tr>
 
   <tr>
-    <th>Default [% field_descs.cc FILTER html %]:</th>
+    <th>Standaard [% field_descs.cc FILTER html %]:</th>
     <td colspan="2">
       <div id="initial_cc">
       </div>
@@ -430,7 +430,7 @@ TUI_hide_default('attachment_text_field');
   [% IF feature_enabled('jsonrpc') AND !cloned_bug_id
         AND user.settings.possible_duplicates.value == 'on' %]
     <tr id="possible_duplicates_container" class="bz_default_hidden">
-      <th>Possible<br>Duplicates:</th>
+      <th>Possible<br>Duplicaten:</th>
       <td colspan="3">
         <div id="possible_duplicates"></div>
         <script type="text/javascript">
@@ -446,16 +446,16 @@ TUI_hide_default('attachment_text_field');
               { key: "update_token", label: '',
                 formatter: YAHOO.bugzilla.dupTable.formatCcButton }
           ];
-          YAHOO.bugzilla.dupTable.addCcMessage = "Add Me to the CC List";
+          YAHOO.bugzilla.dupTable.addCcMessage = "Voeg mij toe aan de CC-lijst";
           YAHOO.bugzilla.dupTable.init({
             container: 'possible_duplicates',
             columns: dt_columns,
             product_name: '[% product.name FILTER js %]',
             summary_field: 'short_desc',
             options: {
-              MSG_LOADING: 'Searching for possible duplicates...',
-              MSG_EMPTY:   'No possible duplicates found.',
-              SUMMARY:     'Possible Duplicates'
+              MSG_LOADING: 'Naar mogelijke duplicaten aan het zoeken...',
+              MSG_EMPTY:   'Geen mogelijke duplicaten gevonden.',
+              SUMMARY:     'Mogelijke Duplicaten'
             }
           });
         </script>
@@ -469,7 +469,7 @@ TUI_hide_default('attachment_text_field');
 
       [% defaultcontent = BLOCK %]
         [% IF cloned_bug_id %]
-+++ This [% terms.bug %] was initially created as a clone of [% terms.Bug %] #[% cloned_bug_id %] +++
++++ Deze [% terms.bug %] werd initieel gecreëerd als een kloon van [% terms.Bug %] #[% cloned_bug_id %] +++
 
 
         [% END %]
@@ -496,8 +496,8 @@ TUI_hide_default('attachment_text_field');
           [% ' checked="checked"' IF comment_is_private %]
                onClick="updateCommentTagControl(this, 'comment')">
         <label for="comment_is_private">
-          Make description and any new attachment private (visible only to members 
-          of the <strong>[% Param('insidergroup') FILTER html %]</strong> group)
+          Maak omschrijving en alle nieuwe bijlagen privé alleen zichtbaar voor leden 
+          van de groep <strong>[% Param('insidergroup') FILTER html %]</strong>)
         </label>
       </td>
     </tr>
