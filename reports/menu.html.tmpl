@@ -18,53 +18,53 @@
 %]
 
 <p>
-  Bugzilla allows you to view and track the state of the [% terms.bug %] database in
-  all manner of exciting ways.
+  Bugzilla laat u toe de status van de [% terms.bug %]-database te bekijken en te volgen
+  op allerlei opwindende manieren.
 </p>
 
-<h2>Current State</h2>
+<h2>Huidige Status</h2>
 
 <ul>
   <li id="report_search">
-    <strong><a href="query.cgi">Search</a></strong> -
-    list sets of [% terms.bugs %].
+    <strong><a href="query.cgi">Zoeken</a></strong> -
+    reeksen [% terms.bugs %] oplijsten.
   </li>
   <li id="report_tabular">
     <strong>
-      <a href="query.cgi?format=report-table">Tabular reports</a>
+      <a href="query.cgi?format=report-table">Tabelvormig rapport</a>
     </strong> -
-    tables of [% terms.bug %] counts in 1, 2 or 3 dimensions, as HTML or CSV.
+    tabellen van [% terms.bug %]-tellingen in 1, 2 of 3 dimensies, als HTML of CSV.
   </li>
   [% IF feature_enabled('graphical_reports') %]
     <li id="report_graphical">
       <strong>
-        <a href="query.cgi?format=report-graph">Graphical reports</a>
+        <a href="query.cgi?format=report-graph">Grafische rapporten</a>
       </strong> -
-      line graphs, bar and pie charts.
+      lijn-grafieken, balk- en taartdiagrammen.
     </li>
   [% END %]
   <li id="report_duplicates">
-    <strong><a href="duplicates.cgi">Duplicates</a></strong> -
-    list of most frequently reported [% terms.bugs %].
+    <strong><a href="duplicates.cgi">Duplicaten</a></strong> -
+    lijst van de meest frequent gerapporteerde [% terms.bugs %].
   </li>
   [% Hook.process('current_state') %]
 </ul>
 
 [% IF feature_enabled('new_charts') OR feature_enabled('old_charts') %]
-  <h2>Change Over Time</h2>
+  <h2>Wijziging Doorheen De Tijd</h2>
 
   <ul>
     [% IF feature_enabled('old_charts') %]
       <li id="old_charts">
-        <strong><a href="reports.cgi">Old Charts</a></strong> - 
-        plot the status and/or resolution of [% terms.bugs %] against
-        time, for each product in your database.
+        <strong><a href="reports.cgi">Oude Grafieken</a></strong> - 
+        plot de status en/of afhandeling van [% terms.bugs %] ten opzichte van
+        de tijd, voor ieder product in uw databank.
       </li>
     [% END %]
     [% IF feature_enabled('new_charts') AND user.in_group(Param("chartgroup")) %]
       <li id="new_charts">
-        <strong><a href="chart.cgi">New Charts</a></strong> - 
-        plot any arbitrary search against time. Far more powerful.
+        <strong><a href="chart.cgi">Nieuwe Grafieken</a></strong> - 
+        plot om het even welke zoekopdracht ten opzichte van de tijd. Veel krachtiger.
       </li>
     [% END %]
   </ul>

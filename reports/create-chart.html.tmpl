@@ -14,7 +14,7 @@
   #%]
 
 [% PROCESS global/header.html.tmpl 
-  title = "Create Chart"
+  title = "Grafiek Aanmaken"
   style_urls = ['skins/standard/buglist.css']
 %]
 
@@ -54,16 +54,16 @@ function subcatSelected() {
     [% IF NOT category OR category.size == 0 %]
       <tr>
         <td>
-          <i>No data sets exist, or none are visible to you.</i>
+          <i>Er bestaan geen datasets, of er zijn er geen zichtbaar voor u.</i>
         </td>
       </tr>
     [% ELSE %]
       <tr>
-        <th><label for="category">Category</label></th>
+        <th><label for="category">Categorie</label></th>
         <th></th>
-        <th><label for="subcategory">Sub-category</label></th>
+        <th><label for="subcategory">Sub-categorie</label></th>
         <th></th>
-        <th><label for="name" accesskey="N">Name</label></th>
+        <th><label for="name" accesskey="N">Naam</label></th>
         <th></th>
       </tr>
       <tr>
@@ -99,22 +99,22 @@ function subcatSelected() {
                                          value_in_hash => 1 } %]
 
         <td>
-          <input type="submit" name="action-add" value="Add To List"
+          <input type="submit" name="action-add" value="Toevoegen Aan Lijst"
                  id="action-add"><br>
         </td>
       </tr>
     [% END %]
   </table>
 
-  <h3>List Of Data Sets To Plot</h3>
+  <h3>Lijst Van Te Plotten Datasets</h3>
 
   [% IF chart.lines.size %]
     <table id="edit_charts">
       <tr>
-        <th>Select</th>
+        <th>Selecteer</th>
         <th>Label</th>
         <th></th>
-        <th>Data Set</th>
+        <th>Dataset</th>
         <th></th>
       </tr>
 
@@ -163,15 +163,15 @@ function subcatSelected() {
             <td>
               [% IF user.id == series.creator_id OR user.in_group("admin") %]
                <a href="chart.cgi?action=edit&amp;series_id=
-                       [% series.series_id %]">Edit</a> |
+                       [% series.series_id %]">Wijzigen</a> |
                <a href="chart.cgi?action=confirm-delete&amp;series_id=
-                       [%- series.series_id %]">Delete</a> |
+                       [%- series.series_id %]">Verwijderen</a> |
               [% END %]
               <a href="buglist.cgi?cmdtype=dorem&amp;namedcmd=
                 [% series.category FILTER uri %]%20/%20
                 [% series.subcategory FILTER uri %]%20/%20
                 [% series.name FILTER uri -%]&amp;series_id=
-                [% series.series_id %]&amp;remaction=runseries">Run Search</a>
+                [% series.series_id %]&amp;remaction=runseries">Zoekopdracht Uitvoeren</a>
             </td>
           </tr>
         [% END %]
@@ -207,51 +207,51 @@ function subcatSelected() {
         </td>
 
         <td class="right">
-          <label for="cumulate"><b>Cumulate</b></label>:
+          <label for="cumulate"><b>Cumuleer</b></label>:
           <input type="checkbox" name="cumulate" id="cumulate" value="1"
           [% " checked" IF chart.cumulate %]>
         </td>
 
         <td></td>
         <td>
-          <label for="datefrom"><b>Date Range</b></label>:
+          <label for="datefrom"><b>Datum-spreiding</b></label>:
           <input type="text" size="12" name="datefrom" id="datefrom"
             placeholder="YYYY-MM-DD"
             value="[% time2str("%Y-%m-%d", chart.datefrom) IF chart.datefrom%]">
-          <label for="dateto"><b>to</b></label>
+          <label for="dateto"><b>tot</b></label>
           <input type="text" size="12" name="dateto" id="dateto"
             placeholder="YYYY-MM-DD"
             value="[% time2str("%Y-%m-%d", chart.dateto) IF chart.dateto %]">
         </td>
 
         <td>
-          <input type="submit" name="action-wrap" value="Chart This List"
+          <input type="submit" name="action-wrap" value="Grafiek Van Deze Lijst"
                  id="action-wrap">
         </td>
       </tr>
     </table>
   [% ELSE %]
-  <p><i>None</i></p>
+  <p><i>Geen</i></p>
   [% END %]  
 </form>
 
 [% IF user.in_group('editbugs') %]
-  <h3>Create New Data Set</h3>
+  <h3>Nieuwe Dataset Aanmaken</h3>
   <p>
-    You can either create a new data set based on one of your saved searches
-    or start with a clean slate.
+    U kunt ofwel een nieuwe dataset maken gebaseerd op een van uw opgeslagen zoekopdrachten
+    of starten van een schone lei.
   </p>
 
   <form action="chart.cgi" id="create_series" name="create_series" method="GET">
     <input type="hidden" name="action" value="convert_search">
-    <label for="series_from_search">Based on:</label>
+    <label for="series_from_search">Gebaseerd op:</label>
     <select id="series_from_search" name="series_from_search">
-      <option value="">(Clean slate)</option>
+      <option value="">(Schone lei)</option>
       [% FOREACH q = user.queries %]
         <option value="[% q.name FILTER html %]">[% q.name FILTER html %]</option>
       [% END %]
     </select>
-    <input id="submit_create" type="submit" value="Create a new data set">
+    <input id="submit_create" type="submit" value="Nieuwe dataset aanmaken">
   </form>
 [% END %]                 
 

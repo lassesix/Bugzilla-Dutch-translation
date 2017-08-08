@@ -41,7 +41,7 @@
   <div id="custom_search_query_controller" class="arrow">&#9660;</div>
   <a id="chart" href="javascript:TUI_toggle_class('custom_search_query')" >
     Zoeken op maat</a> <span class="section_help">Hier boven niet gevonden 
-      wat u zocht? Hier kunt u ANDs, ORs, 
+      wat u zocht? Hier kunt u AND's, OR's, 
       en andere complexe zoekopdrachten ingeven.</span>
 </div>
 <div id="custom_search_filter_section" 
@@ -66,8 +66,8 @@
   <script type="text/javascript">
     redirect_html4_browsers();
     [%# These are alternative labels for the AND and OR options in and_all_select %]
-    var cs_and_label = 'Match ALL of the following:';
-    var cs_or_label  = 'Match ANY of the following:';
+    var cs_and_label = 'Match ALLE van de volgende:';
+    var cs_or_label  = 'Match EEN OF MEER van de volgende:';
     cs_reconfigure('custom_search_last_row');
   </script>
   <script type="text/javascript" src="[% 'js/history.js/native.history.js' FILTER mtime %]"></script>
@@ -179,11 +179,11 @@
   <div class="any_all_select">
     <select name="[% name FILTER html %]" id="[% name FILTER html %]"
             onchange="fix_query_string(this)">
-      <option value="AND">Match ALL of the following separately:</option>
+      <option value="AND">Match ALLE van de volgende apart:</option>
       <option value="OR" [% ' selected="selected"' IF selected == "OR" %]>
-        Match ANY of the following separately:</option>
+        Match EEN OF MEER van de volgende apart:</option>
       <option value="AND_G" [% ' selected' IF selected == "AND_G" %]>
-        Match ALL of the following against the same field:</option>
+        Match ALLE van de volgende tenopzichte van het zelfde veld:</option>
     </select>
     [% IF with_advanced_link %]
       <a id="custom_search_advanced_controller"

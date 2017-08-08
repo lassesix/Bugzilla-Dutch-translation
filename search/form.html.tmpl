@@ -230,7 +230,7 @@ TUI_hide_default('information_query');
   <div id="people_filter_section" class="bz_search_section people_query">
   [% FOREACH n = [1, 2, 3] %]
     <div class="search_email_fields">
-      Any of:
+      Om het even welke van:
       [% PROCESS role_types field = { count => n, name => "emailassigned_to",
                   label=> "de ${terms.Bug} ${field_descs.assigned_to}" } %]
       [% PROCESS role_types field = { count => n, name => "emailreporter",

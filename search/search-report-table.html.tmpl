@@ -28,29 +28,29 @@ var queryform = "reportform"
 [% PROCESS "search/search-report-select.html.tmpl" %]
 
 <p>
-  Choose one or more fields as your axes, and then refine your set of 
-  [% terms.bugs %] using the rest of the form.
+  Kies een of meer velden als uw assen, en verfijn uw set 
+  [% terms.bugs %] door middel van de rest van het formulier.
 </p>
 
-[% button_name = "Generate Report" %]
+[% button_name = "Genereer Rapport" %]
 
 <form method="get" action="report.cgi" name="reportform" id="reportform">
   <table id="tabular_reports_menu">
     <tr>
       <th></th>
       <th id="reports_menu_horizontal_axis">
-        Horizontal Axis:<br>
+        Horizontale As:<br>
         [% PROCESS select name = 'x_axis_field' %]
       </th>
     </tr>
 
     <tr>
       <th id="reports_menu_vertical_axis">
-        Vertical Axis:<br>
+        Verticale As:<br>
         [% PROCESS select name = 'y_axis_field' %]
       </th>
       <th id="reports_menu_multiple_tables">
-        Multiple Tables:<br>
+        Meerdere Tabellen:<br>
         [% PROCESS select name = 'z_axis_field' %]
       </th>
     </tr>
