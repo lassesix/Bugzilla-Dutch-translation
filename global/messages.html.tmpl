@@ -14,21 +14,20 @@
 
 [% message = BLOCK %]
   [% IF    message_tag == "account_created" %]
-    The user account [% otheruser.login FILTER html %] has been created
-    successfully.
+    De gebruikersaccount [% otheruser.login FILTER html %] is succesvol
+    aangemaakt.
     [% IF groups.size %]
-      You may want to edit the group settings now, using the form below.
+      U zou de groepsinstellingen nu kunnen willen veranderen, gebruik makend van het formulier hieronder.
     [% END %]
 
   [% ELSIF message_tag == "account_creation_canceled" %]
-    [% title = "User Account Creation Canceled" %]
-    The creation of the user account [% account FILTER html %] has been
-    canceled.
+    [% title = "Aanmaak Gebruikersaccount Geannuleerd" %]
+    De aanmaak van de gebruikersaccount [% account FILTER html %] werd geannuleerd.
 
   [% ELSIF message_tag == "account_updated" %]
     [% IF changes.size %]
-      [% title = "User $loginold updated" %]
-      The following changes have been made to the user account
+      [% title = "Gebruiker $loginold bijgewerkt" %]
+      De volgende wijzigingen werden doorgevoerd voor de gebruikersaccount
       [%+ loginold FILTER html %]:
       <ul>
         [% FOREACH field = changes.keys %]
@@ -460,9 +459,9 @@
     [% title = "Logged Out" %]
     [% url = "index.cgi?GoAheadAndLogIn=1" %]
     [% link = "Log in again." %]
-    <b>You logged out successfully</b>.
-    The cookie that was remembering your login is now gone. You will be
-    prompted for a login the next time it is required.
+    <b>U bent succesvol uitgelogd</b>.
+    De cookie die uw login bewaarde is nu verwijderd. Er zal u gevraagd worden
+    in te loggen bij de volgende actie die dat vereist.
 
   [% ELSIF message_tag == "login_changed" %]
     [% title = "$terms.Bugzilla Login Changed" %]
