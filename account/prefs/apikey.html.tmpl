@@ -12,24 +12,22 @@
   #%]
 
 <p>
-  API keys are used to authenticate WebService API calls. You can create more than
-  one API key if required. Each API key has an optional description which can help
-  you record what each key is used for. Documentation on how to log in is
-  available from
-  <a href="[% docs_urlbase FILTER html %]api/core/v1/general.html#authentication">here</a>.
+  API-sleutels worden gebruikt om WebService API calls te authenticeren. U kunt meer dan
+  een API-sleutel aanmaken indien nodig. Iedere API-sleutel heeft een optionele omschrijving die u kan helpen
+  bij te houden waarvoor iedere sleutel gebruikt wordt. Documentatie over hoe in te loggen is
+  <a href="[% docs_urlbase FILTER html %]api/core/v1/general.html#authentication">hier</a> beschikbaar.
 </p>
 
-<h3>Existing API keys</h3>
+<h3>Bestaande API-sleutels</h3>
 
-<p>You can update the description, and revoke or unrevoke existing API keys
-here.</p>
+<p>U kunt hier de omschrijving bewerken, en bestaande API-sleutels intrekken of vrijgeven.</p>
 
 <table id="email_prefs">
   <tr class="column_header">
-    <th>API key</th>
-    <th>Description (optional)</th>
-    <th>Last used</th>
-    <th>Revoked</th>
+    <th>API-sleutel</th>
+    <th>Omschrijving (optioneel)</th>
+    <th>Laatst gebruikt</th>
+    <th>Ingetrokken</th>
   </tr>
 
   [% FOREACH api_key IN api_keys %]
@@ -43,7 +41,7 @@ here.</p>
       [% IF api_key.last_used %]
         <td>[% api_key.last_used FILTER time %]</td>
       [% ELSE %]
-        <td class="center"><i>never used</i></td>
+        <td class="center"><i>nooit gebruikt</i></td>
       [% END %]
       <td class="center">
         <input type="checkbox" value="1"
@@ -54,31 +52,31 @@ here.</p>
     </tr>
   [% END %]
   [% UNLESS api_keys.size %]
-    <tr><td colspan="4">You don't have any API keys.</td></tr>
+    <tr><td colspan="4">U heeft geen API-sleutels.</td></tr>
   [% END %]
 </table>
 
 [% IF any_revoked %]
   <a id="apikey_revoked_controller" class="bz_default_hidden"
-     href="javascript:TUI_toggle_class('apikey_revoked')">Hide Revoked Keys</a>
+     href="javascript:TUI_toggle_class('apikey_revoked')">Verberg Ingetrokken Sleutels</a>
   [%# Show the link if the browser supports JS %]
   <script type="text/javascript">
     TUI_hide_default('apikey_revoked');
-    TUI_alternates['apikey_revoked'] = 'Show Revoked Keys';
+    TUI_alternates['apikey_revoked'] = 'Toon Ingetrokken Sleutels';
     YAHOO.util.Dom.removeClass('apikey_revoked_controller',
                                'bz_default_hidden');
   </script>
 [% END %]
 
-<h3>New API key</h3>
+<h3>Nieuwe API-sleutel</h3>
 
-<p>You can generate a new API key by ticking the check box below and optionally
-providing a description for the API key. The API key will be randomly
-generated for you.</p>
+<p>U kunt een nieuwe API-sleutel genereren door de checkbox hieronder aan te vinken en optioneel
+een omschrijving toe te voegen voor de API-sleutel. De API-sleutel zal willekeurig gegenereerd
+worden voor u.</p>
 
 <p>
   <input type="checkbox" name="new_key" id="new_key">
-  Generate a new API key with optional description
+  Genereer een nieuwe API-sleutel met optionele omschrijving
   <input name="new_description" id="new_description">
 </p>
 

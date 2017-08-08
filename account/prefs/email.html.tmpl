@@ -22,24 +22,24 @@
 [%# If the user's bugmail has been disabled by admins, show a warning. %]
 [% IF user.email_disabled %]
   <div class="warningmessages">
-    Your [% terms.bug %]mail has been disabled by the [% terms.Bugzilla %]
-    administrator.  Please contact [% Param('maintainer') %] to enable
-    [%+ terms.bug %]mails.
+    Uw [% terms.bug %]mail is gedesactiveerd door de [% terms.Bugzilla %]
+    beheerder.  Gelieve de [% Param('maintainer') %] te contacteren om
+    [%+ terms.bug %]mails te activeren.
   </div>
 [% END %]
 
 [% IF user.authorizer.can_change_email && Param('allowemailchange') %]
   <p>
-    If you want to change your e-mail address
-    <b>[% user.email FILTER html %]</b> to which [% terms.Bugzilla %] sends
-    notifications, click the "Account Information" tab above.
+    Indien u uw e-mailadres <b>[% user.email FILTER html %]</b> wilt wijzigen
+    waarnaar [% terms.Bugzilla %] notificaties verstuurt, 
+    klik op de "Account-Informatie"-tab hierboven.
   </p>
 [% END %]
 
 <p>
-  If you don't like getting a notification for "trivial"
-  changes to [% terms.bugs %], you can use the settings below to
-  filter some or all notifications.
+  Indien u niet graag meldingen ontvangt voor "triviale"
+  wijzigingen aan [% terms.bugs %] kunt u de instellingen hieronder gebruiken
+  om sommige of alle notificaties uit te schakelen.
 </p>
 
 <script type="text/javascript">
@@ -63,80 +63,80 @@ function SetCheckboxes(setting) {
 // -->
 </script>
 
-<input type="button" value="Enable All Mail" onclick="SetCheckboxes(true); return false;">
-<input type="button" value="Disable All Mail" onclick="SetCheckboxes(false); return false;">
+<input type="button" value="Activeer Alle E-mails" onclick="SetCheckboxes(true); return false;">
+<input type="button" value="Desactiveer Alle E-mails" onclick="SetCheckboxes(false); return false;">
 
 <hr>
 
-<h3>Global options</h3>
+<h3>Globale opties</h3>
 
 [% prefname = "email-$constants.REL_ANY-$constants.EVT_FLAG_REQUESTED" %]
 <input type="checkbox" name="[% prefname %]" id="[% prefname %]" value="1"
        [%+ 'checked="checked"' IF user.mail_settings.${constants.REL_ANY}.${constants.EVT_FLAG_REQUESTED} %]>
-<label for="[% prefname %]">Email me when someone asks me to set a flag</label>
+<label for="[% prefname %]">E-mail mij wanneer iemand mij vraagt een vlag te plaatsen</label>
 <br>
 [% prefname = "email-$constants.REL_ANY-$constants.EVT_REQUESTED_FLAG" %]
 <input type="checkbox" name="[% prefname %]" id="[% prefname %]" value="1"
        [%+ 'checked="checked"' IF user.mail_settings.${constants.REL_ANY}.${constants.EVT_REQUESTED_FLAG} %]>
-<label for="[% prefname %]">Email me when someone sets a flag I asked for</label>
+<label for="[% prefname %]">E-mail mij wanneer iemand op mijn vraag een vlag plaatst</label>
 
 [% IF user.is_global_watcher %]
   <p>
-    You are watching all [% terms.bugs %]. To be removed from this role, contact
+    U bekijkt alle [% terms.bugs %]. Om deze rol niet meer toegewezen te krijgen, contacteer
     <a href="mailto:[% Param("maintainer") %]">[% Param("maintainer") %]</a>.
   </p>
 [% END %]
 
 <hr>
 
-<h3>Field/recipient specific options</h3>
+<h3>Veld/ontvanger-specifieke opties</h3>
 
 [% events = [
     { id = constants.EVT_ADDED_REMOVED,
-      description = "I'm added to or removed from this capacity" },
+      description = "Ik werd toegevoegd of geschrapt van deze rol" },
     { id = constants.EVT_BUG_CREATED,
-      description = "A new $terms.bug is created" },
+      description = "Er is een nieuwe $terms.bug aangemaakt" },
     { id = constants.EVT_OPENED_CLOSED,
-      description = "The $terms.bug is resolved or reopened" },
+      description = "De $terms.bug is afgehandeld of heropend" },
     { id = constants.EVT_COMPONENT,
-      description = "The product or component changes" },
+      description = "Het product of de component verandert" },
     { id = constants.EVT_PROJ_MANAGEMENT,
-      description = "The priority, status, severity, or milestone changes" },
+      description = "De prioriteit, status, ernst, of mijlpaal verandert" },
     { id = constants.EVT_COMMENT,
-      description = "New comments are added" },
+      description = "Nieuwe commentaren toegevoegd" },
     { id = constants.EVT_ATTACHMENT,
-      description = "New attachments are added" },
+      description = "Nieuwe bijlagen toegevoegd" },
     { id = constants.EVT_ATTACHMENT_DATA,
-      description = "Attachment details changes" },
+      description = "Bijlage-details gewijzigd" },
     { id = constants.EVT_KEYWORD,
-      description = "The keywords field changes" },
+      description = "Het sleutelwoorden-veld verandert" },
     { id = constants.EVT_CC,
-      description = "The CC field changes" },
+      description = "Het CC-veld verandert" },
     { id = constants.EVT_DEPEND_BLOCK,
-      description = "The dependency tree changes" },
+      description = "De afhankelijkheden-boom verandert" },
     { id = constants.EVT_OTHER,
-      description = "Any field not mentioned above changes" },
+      description = "Er verandert een veld dat hierboven niet vermeld wordt" },
 ] %]
 
 [% neg_events = [
     { id = constants.EVT_UNCONFIRMED,
-      description = "The $terms.bug is in the UNCONFIRMED state" },
+      description = "De $terms.bug bevindt zich in de status ONBEVESTIGD" },
     { id = constants.EVT_CHANGED_BY_ME,
-      description = "The change was made by me" },
+      description = "De wijziging werd door mij gedaan" },
 ] %]
 
 [% relationships = [
     { id = constants.REL_ASSIGNEE,
-      description = "Assignee" },
+      description = "Verantwoordelijke" },
     { id = constants.REL_REPORTER,
-      description = "Reporter" },
+      description = "Rapporteur" },
     { id = constants.REL_CC,
-      description = "CCed" },
+      description = "CC'd" },
 ] %]
 
 [% IF Param('useqacontact') %]
   [% relationships.push({ id = constants.REL_QA, 
-                          description = "QA Contact" }) %]
+                          description = "QA-Contact" }) %]
 [% END %]
 
 
@@ -150,9 +150,9 @@ function SetCheckboxes(setting) {
 <table id="email_prefs">
   <tr class="column_header">
     <th colspan="[% num_columns FILTER html %]">
-      When my relationship to this [% terms.bug %] is:
+      Wanneer mijn relatie tot deze [% terms.bug %] is:
     </th>
-    <th>I want to receive mail when:</th>
+    <th>Ik wil e-mails ontvangen wanneer:</th>
   </tr>
 
   <tr>
@@ -185,7 +185,7 @@ function SetCheckboxes(setting) {
 
   <tr class="column_header">
     <th colspan="[% num_columns FILTER html %]">&nbsp;</th>
-    <th>but not when (overrides above):</th>
+    <th>maar niet wanneer (overschrijft bovenstaande):</th>
   </tr>
 
   [% FOREACH event = neg_events %]  
@@ -205,17 +205,17 @@ function SetCheckboxes(setting) {
 
 <hr>
 
-<h3>User Watching</h3>
+<h3>Gebruikers Volgen</h3>
 
 <p>
-If you watch a user, it is as if you are standing in their shoes for the 
-purposes of getting email. Email is sent or not according to <em>your</em>
-preferences for <em>their</em> relationship to the [% terms.bug %]
-(e.g. Assignee).
+Wanneer u een gebruiker volgt is het alsof u in hun schoenen staat voor wat betreft 
+het ontvangen van e-mails. E-mails worden al dan niet verzonden volgens <em>uw</em>
+voorkeuren voor <em>hun</em> relatie tot de [% terms.bug %]
+(bv. Verantwoordelijke).
 </p>
 
 [% IF watchedusers.size %]
-  <p>You are watching everyone in the following list:</p>
+  <p>U volgt iedereen in volgende lijst:</p>
   <p>
     <select id="watched_by_you" name="watched_by_you" multiple="multiple" size="5">
         [% FOREACH w = watchedusers %]
@@ -224,14 +224,14 @@ preferences for <em>their</em> relationship to the [% terms.bug %]
     </select>
     <br>
     <input type="checkbox" id="remove_watched_users" name="remove_watched_users">
-    <label for="remove_watched_users">Remove selected users from my watch list</label>
+    <label for="remove_watched_users">Verwijder geselecteerde gebruikers van mijn volg-lijst</label>
   </p>
 [% ELSE %]
-  <p>You are currently not watching any users.</p>
+  <p>U volgt momenteel geen gebruikers.</p>
 [% END %]
 
 
-<p id="new_watched_by_you">Add users to my watch list (comma separated list):
+<p id="new_watched_by_you">Voeg gebruikers toe aan mijn volg-lijst (komma-gescheiden lijst):
   [% INCLUDE global/userselect.html.tmpl
      id => "new_watchedusers"
      name => "new_watchedusers"
@@ -241,29 +241,29 @@ preferences for <em>their</em> relationship to the [% terms.bug %]
   %]
 </p>
 
-<p id="watching_you">Users watching you:<br>
+<p id="watching_you">Gebruikers die u volgen:<br>
   [% IF watchers.size %]
     [% FOREACH watcher = watchers %]
       [% watcher FILTER html %] <br>
     [% END %]
   [% ELSE %]
-    <i>No one</i>
+    <i>Niemand</i>
   [% END %]
 </p>
 
 <hr>
 
-<h3>Ignore [% terms.Bugs %]</h3>
+<h3>Negeer [% terms.Bugs %]</h3>
 
 <p>
-  You can specify a list of [% terms.bugs %] from which you never want to get
-  any email notification of any kind by adding their ID(s) as a comma-separated
-  list. Removing [% terms.abug %] by selecting it from the current ignored list 
-  will re-enable email notifications for the [% terms.bug %].
+  U kunt een lijst [% terms.bugs %] opstellen waarvan u nooit e-mailnotificaties
+  van om het even welke soort wilt ontvangen door hun ID(s) toe te voegen als komma-geschieden
+  lijst. Het verwijderen van [% terms.abug %] door het te selecteren in de huidige negeer-lijst 
+  zal de e-mailnotificaties voor de [% terms.bug %] heractiveren.
 </p>
 [% IF user.bugs_ignored.size %]
   <p>
-    You are currently ignoring:
+    U negeert momenteel:
     <table>
     [% FOREACH bug = user.bugs_ignored %]
       <tr>
@@ -278,7 +278,7 @@ preferences for <em>their</em> relationship to the [% terms.bug %]
           [% IF user.can_see_bug(bug.id) %]
             - [% bug.summary FILTER html %]
           [% ELSE %]
-            (private)
+            (privé)
           [% END %]
         </td>
       </tr>
@@ -288,7 +288,7 @@ preferences for <em>their</em> relationship to the [% terms.bug %]
 [% END %]
 
 <p>
-  Add [% terms.bugs %]:<br>
+  Voeg [% terms.bugs %] toe:<br>
   <input type="text" id="add_ignored_bugs" 
          name="add_ignored_bugs" size="60">
 </p>

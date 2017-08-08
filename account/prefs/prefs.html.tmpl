@@ -24,22 +24,22 @@
 
 [% filtered_login = user.login FILTER html %]
 
-[% tabs = [{ name => "settings", label => "General Preferences",
+[% tabs = [{ name => "settings", label => "Algemene Voorkeuren",
               link => "userprefs.cgi?tab=settings", saveable => "1",
               doc_section => "using/preferences.html#general-preferences" },
-            { name => "email", label => "Email Preferences",
+            { name => "email", label => "E-mail Voorkeuren",
               link => "userprefs.cgi?tab=email", saveable => "1",
               doc_section => "using/preferences.html#email-preferences" },
-            { name => "saved-searches", label => "Saved Searches",
+            { name => "saved-searches", label => "Bewaarde Zoekopdrachten",
               link => "userprefs.cgi?tab=saved-searches", saveable => "1",
               doc_section => "using/preferences.html#saved-searches" },
-            { name => "account", label => "Account Information",
+            { name => "account", label => "Account-Informatie",
               link => "userprefs.cgi?tab=account", saveable => "1",
               doc_section => "using/preferences.html#account-information" },
-            { name => "apikey", label => "API Keys",
+            { name => "apikey", label => "API-Sleutels",
               link => "userprefs.cgi?tab=apikey", saveable => "1",
               doc_section => "using/preferences.html#api-keys" },
-            { name => "permissions", label => "Permissions",
+            { name => "permissions", label => "Permissies",
               link => "userprefs.cgi?tab=permissions", saveable => "0",
               doc_section => "using/preferences.html#permissions" } ] %]
 
@@ -69,17 +69,17 @@
 
 [% IF changes_saved %]
   <div id="message">
-    The changes to your [% current_tab.label FILTER lower %] have been saved.
+    De wijzigingen aan uw [% current_tab.label FILTER lower %] werden bewaard.
 
     [% IF email_changes_saved %]
       <p>
-        In order to confirm your request, we have sent an email to your
-        new email address. As a precaution, an email has also been sent
-        to your old address allowing you to cancel this change if needed.
-        If you don't receive the email, you can
+        We hebben een e-mail gestuurd naar uw nieuw e-mailadres ter bevestiging
+        van uw aanvraag. Als voorzorg werd er ook een e-mail gestuurd
+        naar uw oude adres zodat u deze wijziging zonodig ongedaan kunt maken.
+        Indien u de e-mail niet ontvangt kunt u
         <a href="token.cgi?t=[% email_token FILTER uri %]&amp;a=cxlem">
-        cancel the email address change</a> from here if you wish (especially
-        if you mistyped the new email address).
+        de wijziging van uw e-mailadres hier annuleren</a> indien u wenst (in het bijzonder
+        indien u het nieuwe e-mailadres verkeerd gespeld heeft).
       </p>
     [% END %]
   </div>
@@ -100,7 +100,7 @@
     <input type="hidden" name="dosave" value="1">
     [% UNLESS dont_show_button %]
       <p>
-        <input type="submit" id="update" value="Submit Changes">
+        <input type="submit" id="update" value="Wijzigingen Doorvoeren">
       </p>
     [% END %]
   </form>

@@ -17,11 +17,11 @@
         || (user.authorizer.can_change_email && Param('allowemailchange')) %]
     <tr>
       <td colspan="3">
-        Please enter your existing password to confirm account changes.
+        Gelieve uw bestaand wachtwoord in te geven om account-wijzigingen te bevestigen.
       </td>
     </tr>
     <tr>
-      <th>Password:</th>
+      <th>Wachtwoord:</th>
       <td>
         <input type="hidden" name="old_login" value="[% user.login FILTER html %]">
         <input type="password" name="old_password">
@@ -34,14 +34,14 @@
 
   [% IF user.authorizer.can_change_password %]
     <tr>
-      <th>New password:</th>
+      <th>Nieuw wachtwoord:</th>
       <td>
         <input type="password" name="new_password1">
       </td>
     </tr>
 
     <tr>
-      <th>Confirm new password:</th>
+      <th>Nieuw wachtwoord bevestigen:</th>
       <td>
         <input type="password" name="new_password2">
       </td>
@@ -49,7 +49,7 @@
   [% END %]
 
   <tr>
-    <th>Your real name (optional, but encouraged):</th>
+    <th>Uw echte naam (optioneel, maar aangemoedigd):</th>
     <td>
       <input size="35" name="realname" value="[% realname FILTER html %]">
     </td>
@@ -59,20 +59,20 @@
     [% IF login_change_date %]
       [% IF new_login_name %]
         <tr>
-          <th>Pending email address:</th>
+          <th>E-mailadres in afwachting:</th>
           <td>[% new_login_name FILTER html %]</td>
         </tr>
         <tr>
-          <th>Change request expires:</th>
+          <th>Vraag tot wijziging vervalt:</th>
           <td>[% login_change_date FILTER time %]</td>
         </tr>
       [% ELSE %]
         <tr>
-          <th>Confirmed email address:</th>
+          <th>Bevestigd e-mailadres:</th>
           <td>[% user.login FILTER html %]</td>
         </tr>
         <tr>
-          <th>Completion date:</th>
+          <th>Afwerkingsdatum:</th>
           <td>[% login_change_date FILTER time %]</td>
         </tr>
       [% END %]
@@ -80,9 +80,9 @@
       <tr>
         <th>
           [% IF Param('emailsuffix') %]
-            New login:
+            Niewe login:
           [% ELSE %]
-            New email address:
+            Nieuw e-mailadres:
           [% END %]
         </th>
         <td>

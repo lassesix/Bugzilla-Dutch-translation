@@ -19,7 +19,7 @@
 
     <div id="permissions">
       [% IF has_bits.size %]
-        <p>You have the following permission bits set on your account:</p>
+        <p>Volgende permissie-bits zijn geactiveerd voor uw account:</p>
 
         <table>
           [% FOREACH bit_description = has_bits %]
@@ -34,8 +34,8 @@
           [% SET products = ${"local_$privs"} %]
           [% IF products && products.size %]
             <p>
-              You also have local '[% privs FILTER html %]' privileges
-              for the following products:
+              U heeft ook lokale '[% privs FILTER html %]' privileges
+              voor volgende producten:
             </p>
             <ul>
               [% FOREACH product = products %]
@@ -46,18 +46,18 @@
         [% END %]
 
       [% ELSE %]
-        <p>There are no permission bits set on your account.</p>
+        <p>Er zijn geen permissie-bits ingesteld voor uw account.</p>
       [% END %]
 
       [% IF user.in_group('editusers') %]
         <p>
-          You have editusers privileges. You can turn on and off all
-          permissions for all users.
+          U heeft editusers privileges. U kunt alle permissies aan en uit zetten
+          voor alle gebruikers.
         </p>
       [% ELSIF set_bits.size %]
         <p>
-          And you can turn on or off the following bits for
-          <a href="editusers.cgi">other users</a>:
+          En u kunt de volgende bits aan of uit zetten voor
+          <a href="editusers.cgi">andere gebruikers</a>:
         </p>
 
         <table>
@@ -72,8 +72,8 @@
 
       [% IF user.in_group('bz_sudoers') %]
         <p>
-          You are a member of the <b>bz_sudoers</b> group, so you can
-          <a href="relogin.cgi?action=prepare-sudo">impersonate someone else</a>.
+          U bent lid van de <b>bz_sudoers</b>-groep, dus u kunt
+          <a href="relogin.cgi?action=prepare-sudo">iemand anders' identiteit overnemen</a>.
         </p>
       [% END %]
     </div>
