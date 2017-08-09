@@ -17,7 +17,7 @@
 [% FOREACH comment = new_comments %]
 
 [%- IF comment.count %]
---- Commentaar #[% comment.count %] van [% comment.author.identity %] ---
+--- Reactie #[% comment.count %] van [% comment.author.identity %] ---
 [% END %]
 [%+ comment.body_full({ is_bugmail => 1, wrap => 1 }) FILTER strip_control_chars %]
 [% END %]

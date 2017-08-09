@@ -1128,7 +1128,7 @@
                id="newcommentprivacy"
                onClick="updateCommentTagControl(this, 'comment')">
         <label for="newcommentprivacy">
-          Commentaar priv√ maken (alleen zichtbaar voor leden van de groep
+          Reactie priv√ maken (alleen zichtbaar voor leden van de groep
           <strong>[% Param('insidergroup') FILTER html %]</strong>)
         </label>
       [% END %]
@@ -1148,7 +1148,7 @@
           [% END %]
           [% Hook.process("after_comment_textarea", 'bug/edit.html.tmpl') %]
         [% ELSE %]
-          U heeft geen toestemming om bijkomende commentaren te leveren op deze [% terms.bug %].
+          U heeft geen toestemming om bijkomende reacties te leveren op deze [% terms.bug %].
         [% END %]
         <br>
         [% PROCESS commit_button id=""%]
@@ -1174,10 +1174,10 @@
           <td>
             <fieldset>
               <legend>Nota</legend>
-              U moet
+              U moet uzelf
               <a href="show_bug.cgi?id=
                       [%- bug.bug_id %]&amp;GoAheadAndLogIn=1">aanmelden</a>
-              voordat u commentaar kunt toevoegen of aanpassingen kunt doen aan deze [% terms.bug %].
+              voordat u een reactie kunt toevoegen of aanpassingen kunt doen aan deze [% terms.bug %].
             </fieldset>
           </td>
         </tr> 

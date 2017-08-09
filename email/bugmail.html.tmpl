@@ -20,7 +20,7 @@
       [% FOREACH comment = new_comments.reverse %]
         <div>
           [% IF comment.count %]
-            <b>[% INCLUDE bug/link.html.tmpl bug = bug, link_text = "Commentaar # ${comment.count}",
+            <b>[% INCLUDE bug/link.html.tmpl bug = bug, link_text = "Reactie # ${comment.count}",
                                              comment_num = comment.count, full_url = 1, user = to_user %]
               on [% INCLUDE bug/link.html.tmpl bug = bug, link_text = "$terms.bug $bug.id",
                                                full_url = 1, user = to_user %]
