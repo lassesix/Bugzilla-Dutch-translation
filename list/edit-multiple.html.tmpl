@@ -169,7 +169,7 @@
   [% END %]
 
   <tr>
-    <th><label for="assigned_to">Verantwoordelijke:</label></th>
+    <th><label for="assigned_to">Opvolger:</label></th>
     <td colspan="3">
       [% INCLUDE global/userselect.html.tmpl
            id => "assigned_to"
@@ -178,7 +178,7 @@
            size => 40
       %]
       <input type="checkbox" id="set_default_assignee" name="set_default_assignee" value="1">
-      <label for="set_default_assignee">Reset Verantwoordelijke naar standaard</label>
+      <label for="set_default_assignee">Reset Opvolger naar standaard</label>
     </td>
   </tr>
 
@@ -193,7 +193,7 @@
              size => 40
         %]
         <input type="checkbox" id="set_default_qa_contact" name="set_default_qa_contact" value="1">
-        <label for="set_default_qa_contact">Reset QA Contact naar standaard</label>
+        <label for="set_default_qa_contact">Reset QA-Contactpersoon naar standaard</label>
       </td>
     </tr>
   [% END %]

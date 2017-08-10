@@ -127,7 +127,7 @@ function SetCheckboxes(setting) {
 
 [% relationships = [
     { id = constants.REL_ASSIGNEE,
-      description = "Verantwoordelijke" },
+      description = "Opvolger" },
     { id = constants.REL_REPORTER,
       description = "Rapporteur" },
     { id = constants.REL_CC,
@@ -211,7 +211,7 @@ function SetCheckboxes(setting) {
 Wanneer u een gebruiker volgt is het alsof u in hun schoenen staat voor wat betreft 
 het ontvangen van e-mails. E-mails worden al dan niet verzonden volgens <em>uw</em>
 voorkeuren voor <em>hun</em> relatie tot de [% terms.bug %]
-(bv. Verantwoordelijke).
+(bv. Opvolger).
 </p>
 
 [% IF watchedusers.size %]
